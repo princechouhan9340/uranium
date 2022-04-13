@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 // const UserModel= require("../models/userModel.js")
-const UserController= require("../controllers/userController")
-const BookController= require("../controllers/bookController")
+
+const BookController= require("../controllers/bookcollection")
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
-router.post("/createUser", UserController.createUser  )
+router.post("/inputBook", BookController.inputBook  )
 
-router.get("/getUsersData", UserController.getUsersData)
-
-router.post("/createBook", BookController.createBook  )
-
+// P-1  === RETURN NUMBERS OF BOOK DATA 
 router.get("/getBooksData", BookController.getBooksData)
+
+
+
 
 module.exports = router;
