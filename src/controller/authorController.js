@@ -4,7 +4,7 @@ const validateEmail = (email) => {
     return String(email)
         .toLowerCase()
         .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,20}$/
         );
 };
 const createAuthor = async (req, res) => {
@@ -17,9 +17,11 @@ const createAuthor = async (req, res) => {
         if (!data.fname || !data.lname || !data.email || !data.password || !data.title)
             return res.status(400).send({ status: false, msg: "Enter mandatory fields" })
 
-        if (typeof (data.fname) != "string" || typeof (data.lname) != "string") {
-            return res.status(400).send({ status: false, msg: "Input is not string..." })
+        if ((typeof (data.fname) != "string" ) || typeof (data.lname) != "string" || typeof(data.title)!= "string") {
+            return res.status(400).send({ status: false, msg: "invalid Input" })
         }
+        if(!(data.title== "Mr" || data.title == "Miss" || data.title == "Mrs"))
+        return res.status(400).send({ status: false, msg: "Enter a valid title" })
         if (!validateEmail(data.email)) {
             return res.status(400).send({ status: false, msg: "Invaild E-mail id " })
         }
@@ -47,6 +49,7 @@ const login = async function  (req, res) {
         if (data.password == undefined) {
             return res.status(400).send({ status: false, msg: "Please Provide Password" })
         }
+        data.email = data.email.toLowerCase().trim();
         if (!validateEmail(data.email)) {
             return res.status(400).send({ status: false, msg: "Invaild E-mail id " })
         }

@@ -4,30 +4,42 @@ const blogSchema = mongoose.Schema({
 
     title: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        lowercase: true
     }, body: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     }, authorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Author",
-        required: true
+        required: true,
     },
-    tags: [String],
+    tags: {
+        type: [String],
+        lowercase: true
+    },
     category: {
         type: [String],
-        required: true
+        required: true,
+        trim: true
     },
-    subcategory: [String],
+    subcategory: {
+        type: [String],
+        lowercase: true
+    },
     deletedAt: Date,
     isDeleted: {
         type: Boolean,
-        default: false
+        default: false,
+        trim: true
     },
     publishedAt: Date,
     isPublished: {
         type: Boolean,
-        default: false
+        default: false,
+        trim: true
     }
 }, { timestamps: true })
 
