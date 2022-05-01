@@ -165,13 +165,15 @@ const deleteBlogs = async (req, res) => {
         //extracting keys from req.query
         let { category, tags, subcategory, isPublished, authorId } = req.query
         // if we're getting authorId in request but not matching with tokenId
+        
+         //  if (typeof(authorId)!="undefined" && authorId != req.tokenId)
         if (authorId && authorId != req.tokenId)
             return res.status(403).send({ status: false, msg: "Unauthorised access" })
         let obj = {
             authorId : req.tokenId,
             isDeleted:false
         }
-        if(typeof(isPublished)!=undefined)
+        if(typeof(isPublished)!="undefined")
             obj.isPublished=isPublished;
         let obj2 = {}
         if (category) {
