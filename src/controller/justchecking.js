@@ -1,9 +1,3 @@
-const obj = {
-    a:1,
-    b:2,
-    c:4
-}
+const filterArray=a=>a.filter(x=>typeof x!=='string'||!!x.trim())
 
-const arr =Object.keys(obj)
-
-console.log(arr.length)
+console.log(filterArray([1, 2, 4, '    jlasdfla    ', '']))
